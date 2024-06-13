@@ -1,5 +1,6 @@
 FROM registry.access.redhat.com/ubi8/nodejs-18:latest
 
+RUN mkdir /app
 WORKDIR /app
 
 COPY package*.json ./
