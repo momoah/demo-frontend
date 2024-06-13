@@ -1,14 +1,14 @@
 FROM registry.access.redhat.com/ubi8/nodejs-18:latest
 
-RUN mkdir /app
-WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+WORKDIR /opt/app-root/
 
-COPY . .
+COPY --chown=1001:1001 package*.json ./
+COPY --chown=1001:1001  . .
 
-RUN npm run build
+RUN cd /opt/app-root/; \
+    mkdir -p /opt/app-root/src/.npm-global/lib ;\
+    npm run build
 
 EXPOSE 3000
 CMD ["npx", "serve", "-s", "build"]

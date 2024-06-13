@@ -35,5 +35,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://backend:3000"
+  "proxy": "http://backend:3000",
+  "node-sass": "^7.0.1"
 }
