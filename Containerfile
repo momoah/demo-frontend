@@ -1,6 +1,13 @@
 FROM quay.io/nginx/nginx-unprivileged:latest
 
-COPY nginx.conf /etc/nginx/nginx.conf
+ENV BACKEND_URL="http://192.168.1.65:3000";
+
+COPY nginx.conf.template /etc/nginx/nginx.conf.template
+
+RUN envsubst '${BACKEND_URL}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+
+RUN echo "${BACKEND_URL}"; \
+    cat /etc/nginx/nginx.conf
 
 EXPOSE 8080
 
