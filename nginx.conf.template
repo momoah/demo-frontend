@@ -9,7 +9,7 @@ http {
     listen 8080;
 
     location / {
-      proxy_pass ${BACKEND_URL}
+      proxy_pass ${BACKEND_URL};
     }
   }
 }
