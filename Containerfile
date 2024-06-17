@@ -1,6 +1,6 @@
 FROM quay.io/nginx/nginx-unprivileged:latest
 
-ENV BACKEND_URL=${BACKEND_URL:-default-backend-url}
+ENV BACKEND_URL=${BACKEND_URL:http://backend-url:3000}
 
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
