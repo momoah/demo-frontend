@@ -1,16 +1,15 @@
 FROM quay.io/nginx/nginx-unprivileged:latest
 
-ENV BACKEND_URL="http://localhost:3000"
+COPY --chown=1001:0 entrypoint.sh /entrypoint.sh
 
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
-RUN envsubst '${BACKEND_URL}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
-
-RUN echo "${BACKEND_URL}"; \
-    cat /etc/nginx/nginx.conf
-
 EXPOSE 8080
 
+USER 1001
+
+# Run entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
 
 
